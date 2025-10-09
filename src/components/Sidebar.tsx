@@ -10,10 +10,11 @@ const Sidebar: React.FC<SidebarProps> = ({ isOpen, onClose }) => {
   const location = useLocation();
 
   const menuItems = [
-    { path: '/', label: '首页', icon: '🏠' },
+    { path: '/dashboard', label: '仪表板', icon: '🏠' },
     { path: '/learning-paths', label: '学习路径', icon: '📚' },
     { path: '/ai-capabilities', label: 'AI能力', icon: '🤖' },
     { path: '/progress', label: '学习进度', icon: '📊' },
+    { path: '/profile', label: '个人资料', icon: '👤' },
     { path: '/settings', label: '设置', icon: '⚙️' },
   ];
 
