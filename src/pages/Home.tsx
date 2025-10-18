@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Navbar from '@/components/Navbar';
 import Footer from '@/components/Footer';
 import RoleSelector from '@/components/RoleSelector';
@@ -9,6 +10,7 @@ import AICapabilityMap from '@/components/AICapabilityMap';
 import LearningPathEngine from '@/components/LearningPathEngine';
 import CertificateCenter from '@/components/CertificateCenter';
 import TrustEndorsement from '@/components/TrustEndorsement';
+import { useAuth } from '@/contexts/authContext';
 import { 
   capabilityData, 
   applicationData, 
@@ -24,6 +26,14 @@ export default function Home() {
   // 状态管理
   const [activeRole, setActiveRole] = useState<UserRole>('learner');
   const [activePath, setActivePath] = useState('capability');
+  const navigate = useNavigate();
+  const { setIsAuthenticated } = useAuth();
+
+  // 登录处理函数
+  const handleLogin = () => {
+    setIsAuthenticated(true);
+    navigate('/dashboard');
+  };
   
   return (
     <div className="min-h-screen bg-gray-50 flex flex-col">
@@ -49,7 +59,10 @@ export default function Home() {
                 <div>
                   <h2 className="text-2xl font-semibold mb-4">学习者入口</h2>
                   <p className="mb-6">10分钟生成AI能力雷达图，开启个性化学习之旅</p>
-                  <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105">
+                  <button 
+                    onClick={handleLogin}
+                    className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105"
+                  >
                     开始能力测评
                   </button>
                 </div>
@@ -59,7 +72,10 @@ export default function Home() {
                 <div>
                   <h2 className="text-2xl font-semibold mb-4">培训单位入口</h2>
                   <p className="mb-6">定制企业AI人才培养方案，提升组织创新能力</p>
-                  <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105">
+                  <button 
+                    onClick={handleLogin}
+                    className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105"
+                  >
                     企业需求诊断
                   </button>
                 </div>
@@ -69,7 +85,10 @@ export default function Home() {
                 <div>
                   <h2 className="text-2xl font-semibold mb-4">政府部门入口</h2>
                   <p className="mb-6">区域AI人才发展规划与政策适配工具</p>
-                  <button className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105">
+                  <button 
+                    onClick={handleLogin}
+                    className="bg-orange-500 hover:bg-orange-600 text-white font-bold py-3 px-8 rounded-full transition-all transform hover:scale-105"
+                  >
                     下载人才白皮书
                   </button>
                 </div>

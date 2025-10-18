@@ -7,6 +7,7 @@ import LearningPaths from './pages/LearningPaths';
 import AICapabilities from './pages/AICapabilities';
 import Progress from './pages/Progress';
 import Settings from './pages/Settings';
+import Profile from './pages/Profile';
 import Home from '@/pages/Home';
 import { AuthContext } from '@/contexts/authContext';
 
@@ -19,6 +20,7 @@ const LoadingSpinner = () => (
 
 export default function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
+  const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const logout = () => {
     setIsAuthenticated(false);
@@ -30,7 +32,7 @@ export default function App() {
         value={{ isAuthenticated, setIsAuthenticated, logout }}
       >
           <div className="flex h-screen bg-gray-100">
-            {isAuthenticated && <Sidebar />}
+            {isAuthenticated && <Sidebar isOpen={sidebarOpen} onClose={() => setSidebarOpen(false)} />}
             <main className="flex-1 overflow-auto">
               <Suspense fallback={<LoadingSpinner />}>
                 <Routes>
@@ -57,6 +59,10 @@ export default function App() {
                   <Route 
                     path="/settings" 
                     element={isAuthenticated ? <Settings /> : <Navigate to="/" />} 
+                  />
+                  <Route 
+                    path="/profile" 
+                    element={isAuthenticated ? <Profile /> : <Navigate to="/" />} 
                   />
                   <Route 
                     path="/other" 
